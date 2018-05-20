@@ -5,8 +5,8 @@ from sqlalchemy import (
 from database import Base
 
 
-class Application(Base):
-    __tablename__ = 'application'
+class SocialApp(Base):
+    __tablename__ = 'socialapp'
     id = Column(Integer, primary_key=True)
     title = Column(String(255), nullable=False)
     client_id = Column(String(255), nullable=False)
@@ -26,5 +26,5 @@ application_admin = Table(
     'application_admin', Base.metadata,
     Column('id', Integer, primary_key=True),
     Column('admin_id', Integer, ForeignKey('admin.id'), nullable=False),
-    Column('application_id', Integer, ForeignKey('application.id'), nullable=False)
+    Column('socialapp_id', Integer, ForeignKey('socialapp.id'), nullable=False)
 )
