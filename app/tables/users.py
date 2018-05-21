@@ -14,6 +14,7 @@ class User(Base):
     phone_number = Column(String(255), nullable=False)
     profile_picture = Column(String(255), nullable=False)
 
+    role_id = Column(ForeignKey('role.id'), nullable=False)
     socialapp_id = Column(ForeignKey('socialapp.id'), nullable=False)
 
 
@@ -33,5 +34,3 @@ class Role(Base):
     id = Column(Integer, primary_key=True)
     title = Column(String(255), nullable=False)
     description = Column(Text)
-
-    user_id = Column(ForeignKey('user.id'), nullable=False)
