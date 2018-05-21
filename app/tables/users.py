@@ -2,7 +2,7 @@ from sqlalchemy import (
     Column, String, Integer, ForeignKey, DateTime
 )
 
-from database import Base, engine
+from app.database import Base
 
 
 class User(Base):
@@ -25,6 +25,3 @@ class SocialToken(Base):
     expires_at = Column(DateTime)
 
     user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
-
-
-Base.metadata.create_all(engine)
