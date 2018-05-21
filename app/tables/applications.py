@@ -17,8 +17,8 @@ class SocialApp(Base):
     __tablename__ = 'socialapp'
     id = Column(Integer, primary_key=True)
     title = Column(String(255), nullable=False)
-    client_id = Column(String(255), nullable=False)
-    secret_id = Column(String(255), nullable=False)
+    client_id = Column(String(255), unique=True, nullable=False)
+    secret_key = Column(String(255), unique=True, nullable=False)
 
     admin = relationship(
         'Admin', secondary=application_admin, backref='socialapps'
