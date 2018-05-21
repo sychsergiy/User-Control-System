@@ -10,7 +10,6 @@ from .permissions import role_permission, user_extra_permission
 
 class User(Base):
     __tablename__ = 'user'
-
     id = Column(Integer, primary_key=True)
     first_name = Column(String(255), nullable=False)
     last_name = Column(String(255), nullable=False)
@@ -20,9 +19,6 @@ class User(Base):
     role_id = Column(ForeignKey('role.id'), nullable=False)
     role = relationship('Role')
 
-    socialapp_id = Column(ForeignKey('socialapp.id'), nullable=False)
-    socialapp = relationship('SocialApp')
-
     social_token = relationship('SocialToken', uselist=False, back_populates="user")
     permission = relationship(
         'Operation', secondary=user_extra_permission, backref='users'
@@ -31,7 +27,6 @@ class User(Base):
 
 class SocialToken(Base):
     __tablename__ = 'socialtoken'
-
     id = Column(Integer, primary_key=True)
     access_token = Column(String(255))
     expires_at = Column(DateTime)
@@ -42,10 +37,12 @@ class SocialToken(Base):
 
 class Role(Base):
     __tablename__ = 'role'
-
     id = Column(Integer, primary_key=True)
     title = Column(String(255), nullable=False)
     description = Column(Text)
+
+    socialapp_id = Column(ForeignKey('socialapp.id'), nullable=False)
+    socialapp = relationship('SocialApp')
 
     users = relationship('User', back_populates='role')
     permission = relationship(
