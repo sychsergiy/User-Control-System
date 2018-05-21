@@ -1,5 +1,5 @@
 from sqlalchemy import (
-    Column, String, Integer, ForeignKey, DateTime
+    Column, String, Integer, ForeignKey, DateTime, Text
 )
 
 from app.database import Base
@@ -25,3 +25,13 @@ class SocialToken(Base):
     expires_at = Column(DateTime)
 
     user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+
+
+class Role(Base):
+    __tablename__ = 'role'
+
+    id = Column(Integer, primary_key=True)
+    title = Column(String(255), nullable=False)
+    description = Column(Text)
+
+    user_id = Column(ForeignKey('user.id'), nullable=False)
