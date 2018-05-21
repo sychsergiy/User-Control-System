@@ -2,7 +2,7 @@ from sqlalchemy import (
     Table, Column, String, Integer, Boolean, ForeignKey
 )
 
-from database import Base
+from app.database import Base
 
 
 class SocialApp(Base):
