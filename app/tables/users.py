@@ -1,8 +1,11 @@
 from sqlalchemy import (
-    Column, String, Integer, ForeignKey, DateTime, Text
+    Column, String, Integer, ForeignKey, DateTime, Text,
 )
+from sqlalchemy.orm import relationship
 
 from app.database import Base
+
+from .permissions import role_permission, user_extra_permission
 
 
 class User(Base):
@@ -15,7 +18,15 @@ class User(Base):
     profile_picture = Column(String(255), nullable=False)
 
     role_id = Column(ForeignKey('role.id'), nullable=False)
+    role = relationship('Role')
+
     socialapp_id = Column(ForeignKey('socialapp.id'), nullable=False)
+    socialapp = relationship('SocialApp')
+
+    social_token = relationship('SocialToken', uselist=False, back_populates="user")
+    permission = relationship(
+        'Operation', secondary=user_extra_permission, backref='users'
+    )
 
 
 class SocialToken(Base):
@@ -26,6 +37,7 @@ class SocialToken(Base):
     expires_at = Column(DateTime)
 
     user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    user = relationship("User", back_populates="social_token")
 
 
 class Role(Base):
@@ -34,3 +46,8 @@ class Role(Base):
     id = Column(Integer, primary_key=True)
     title = Column(String(255), nullable=False)
     description = Column(Text)
+
+    users = relationship('User', back_populates='role')
+    permission = relationship(
+        'Operation', secondary=role_permission, backref='roles'
+    )

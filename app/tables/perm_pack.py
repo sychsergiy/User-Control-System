@@ -1,16 +1,9 @@
 from sqlalchemy import (
     Table, Column, Integer, ForeignKey, String, Text, UniqueConstraint
 )
+from sqlalchemy.orm import relationship
 
 from app.database import Base
-
-
-class PermissionsPack(Base):
-    __tablename__ = 'permpack'
-    id = Column(Integer, primary_key=True)
-    title = Column(String(255), nullable=False)
-    description = Column(Text)
-
 
 permpack_operation = Table(
     'permpack_operation', Base.metadata,
@@ -20,3 +13,12 @@ permpack_operation = Table(
 
     UniqueConstraint('permpack_id', 'operation_id', name='UT_permpack_operation')
 )
+
+
+class PermissionsPack(Base):
+    __tablename__ = 'permpack'
+    id = Column(Integer, primary_key=True)
+    title = Column(String(255), nullable=False)
+    description = Column(Text)
+
+    permission = relationship('Operation', secondary=permpack_operation)
