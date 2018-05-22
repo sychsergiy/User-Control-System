@@ -29,7 +29,7 @@ class Operation(Base):
     description = Column(Text)
 
     object_id = Column(ForeignKey('object.id'), nullable=False)
-    object = relationship('Object')
+    object = relationship('Object', backref='operations')
 
     def __str__(self):
         return 'Operation: {}'.format(self.title)
