@@ -1,7 +1,7 @@
 from app.tables import SocialApp, Admin, application_admin
 
 
-def select_socialapps(session):
+def run_socialapp_selections(session):
     # select admins for the first socialapp
     app1 = session.query(SocialApp).first()
     print(app1.admin)

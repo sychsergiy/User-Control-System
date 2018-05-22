@@ -1,7 +1,7 @@
 from app.tables import Role, User, SocialApp
 
 
-def select_roles(session):
+def run_roles_selections(session):
     # select admin_role
     admin_role = session.query(Role).filter_by(title='admin').first()
     print(admin_role)

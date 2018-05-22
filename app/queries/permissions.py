@@ -1,7 +1,7 @@
 from app.tables import Role, User, Operation, role_permission, Object, user_extra_permission
 
 
-def select_permissions(session):
+def run_permission_selections(session):
     # select permissions for each role
     permissions = session.query(Role).join(role_permission).join(Operation).join(Object) \
         .with_entities(Role.title, Operation.title, Object.title).all()
