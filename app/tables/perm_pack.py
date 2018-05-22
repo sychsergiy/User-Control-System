@@ -21,6 +21,9 @@ class PermissionsPack(Base):
     title = Column(String(255), nullable=False)
     description = Column(Text)
 
+    socialapp_id = Column(ForeignKey('socialapp.id'), nullable=False)
+    socialapp = relationship('SocialApp')
+
     permission = relationship('Operation', secondary=permpack_operation)
 
     def __str__(self):

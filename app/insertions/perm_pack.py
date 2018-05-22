@@ -1,11 +1,12 @@
-from app.tables import PermissionsPack, Operation
+from app.tables import PermissionsPack, Operation, SocialApp
 
 from .insert_command import InsertCommand
 
 
 class InsertPermissionsPackCommand(InsertCommand):
     def execute(self):
-        perm_pack = PermissionsPack(title='Test Permissions Pack')
+        socialapp = self.session.query(SocialApp).first()
+        perm_pack = PermissionsPack(title='Test Permissions Pack', socialapp=socialapp)
 
         operations_for_moderator = self.session.query(Operation).filter(
             Operation.title == 'post' or Operation.title == 'view'
