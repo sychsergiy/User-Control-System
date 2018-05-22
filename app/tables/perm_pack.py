@@ -22,3 +22,9 @@ class PermissionsPack(Base):
     description = Column(Text)
 
     permission = relationship('Operation', secondary=permpack_operation)
+
+    def __str__(self):
+        return 'Permissions Pack: {}'.format(self.title)
+
+    def __repr__(self):
+        return 'Permissions Pack: {}'.format(self.title)

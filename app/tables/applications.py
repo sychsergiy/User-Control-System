@@ -24,6 +24,12 @@ class SocialApp(Base):
         'Admin', secondary=application_admin, backref='socialapps'
     )
 
+    def __str__(self):
+        return 'SocialApp: {}'.format(self.title)
+
+    def __repr__(self):
+        return 'SocialApp: {}'.format(self.title)
+
 
 class Admin(Base):
     __tablename__ = 'admin'
@@ -31,3 +37,9 @@ class Admin(Base):
     first_name = Column(String(255), nullable=False)
     last_name = Column(String(255), nullable=False)
     is_superuser = Column(Boolean, default=False)
+
+    def __str__(self):
+        return 'Admin: {} {}'.format(self.first_name, self.last_name)
+
+    def __repr__(self):
+        return 'Admin: {} {}'.format(self.first_name, self.last_name)

@@ -24,6 +24,12 @@ class User(Base):
         'Operation', secondary=user_extra_permission, backref='users'
     )
 
+    def __str__(self):
+        return 'User: {} {}'.format(self.first_name, self.last_name)
+
+    def __repr__(self):
+        return 'User: {} {}'.format(self.first_name, self.last_name)
+
 
 class SocialToken(Base):
     __tablename__ = 'socialtoken'
@@ -48,3 +54,9 @@ class Role(Base):
     permission = relationship(
         'Operation', secondary=role_permission, backref='roles'
     )
+
+    def __str__(self):
+        return 'Role: {}'.format(self.title)
+
+    def __repr__(self):
+        return 'Role: {}'.format(self.title)

@@ -15,6 +15,12 @@ class Object(Base):
     socialapp_id = Column(Integer, ForeignKey('socialapp.id'), nullable=False)
     socialapp = relationship('SocialApp')
 
+    def __str__(self):
+        return 'Object {}'.format(self.title)
+
+    def __repr__(self):
+        return 'Object {}'.format(self.title)
+
 
 class Operation(Base):
     __tablename__ = 'operation'
@@ -24,3 +30,9 @@ class Operation(Base):
 
     object_id = Column(ForeignKey('object.id'), nullable=False)
     object = relationship('Object')
+
+    def __str__(self):
+        return 'Operation: {}'.format(self.title)
+
+    def __repr__(self):
+        return 'Operation: {}'.format(self.title)
