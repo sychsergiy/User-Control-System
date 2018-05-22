@@ -11,11 +11,11 @@ def get_metadata():
 
 def get_database_url():
     try:
-        create_engine(os.environ['DATABASE_URL'])
+        return os.environ['DATABASE_URL']
     except KeyError:
         raise EnvironmentError('Provide DATABASE_URL environment variable')
 
 
-engine = get_database_url()
+engine = create_engine(get_database_url())
 
 Base = declarative_base()
